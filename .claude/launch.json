@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "docking-sim",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "streamlit", "run", "app.py", "--server.port", "8533", "--server.headless", "true", "--server.fileWatcherType", "none"],
+      "port": 8533
+    }
+  ]
+}

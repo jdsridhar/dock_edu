@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Logs / runtime
+*.log
+streamlit*.log
+
+# Build inputs (raw RCSB downloads — only needed to re-run tools/build_structures.py)
+assets/structures_raw/
+
+# Build scratch
+tools/content_args.json
+
+# OS
+.DS_Store
+Thumbs.db

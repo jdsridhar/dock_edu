@@ -1,0 +1,1013 @@
+{
+ "packs": {
+  "acetylcholinesterase": {
+   "slug": "acetylcholinesterase",
+   "accurate": false,
+   "issues": [
+    "Oxyanion-hole mislabeling: the pack's pocket_summary claims 'Gly118, Gly117 and Gly119-type loop glycines forming the oxyanion hole.' Gly117 is NOT an oxyanion-hole residue, and 'Gly119-type loop glycines' is a fabricated hedge. The canonical Torpedo AChE oxyanion hole is formed by the backbone amides of Gly118, Gly119, and Ala201 (not Gly117), and it stabilizes the tetrahedral carbonyl of the substrate/transition state \u2014 it does not 'cradle' tacrine (an aminoacridine with no carbonyl in that subsite). Corrected to describe Gly117/Gly118 accurately as channel/loop backbone glycines consistent with the ground-truth hydrophobic contacts.",
+    "Residue note for GLY118 overstated its oxyanion-hole role around the ligand; softened to reflect that its backbone amide is part of the catalytic-floor glycine loop (true oxyanion hole = Gly118/Gly119/Ala201) and that here it makes a hydrophobic backbone packing contact, matching the ground-truth interaction.",
+    "Beat 8 ('Tightening into the oxyanion glycines') framed Gly118/Gly117 as 'oxyanion glycines' gripping tacrine; reworded to 'channel-lining glycines' to avoid implying an oxyanion-hole interaction that does not apply to a non-carbonyl aminoacridine."
+   ],
+   "overview": "Acetylcholinesterase (AChE) is a serine hydrolase that terminates cholinergic neurotransmission by hydrolyzing the neurotransmitter acetylcholine into choline and acetate at synapses and neuromuscular junctions. It is one of the fastest known enzymes, operating near the diffusion limit, and does so via a buried catalytic triad reached through a deep, narrow ~20 A gorge lined with aromatic residues. By rapidly clearing acetylcholine, it resets the postsynaptic membrane for the next nerve impulse.",
+   "disease": "Because AChE controls acetylcholine levels, it is a central drug target in Alzheimer's disease and other dementias, where boosting cholinergic signaling with reversible inhibitors partially compensates for the loss of cholinergic neurons. It is also the molecular target of organophosphate nerve agents and pesticides, making AChE pharmacology relevant to both therapeutic enhancement of cognition and to antidote/reactivator design after poisoning.",
+   "drug": {
+    "name": "Tacrine",
+    "code": "THA",
+    "drug_class": "Reversible acetylcholinesterase inhibitor (aminoacridine; first-generation cholinesterase inhibitor)",
+    "mechanism": "Tacrine is a reversible, competitive inhibitor that wedges its flat, protonatable acridine ring into the aromatic gorge of AChE. It stacks against the indole of Trp84 in the anionic subsite to block acetylcholine binding and obstruct access to the catalytic machinery near His440, rather than forming a covalent adduct, so inhibition is non-covalent and reversible."
+   },
+   "pocket_summary": "The binding site is the deep aromatic gorge that funnels substrate to the catalytic triad at its base. At the bottom lies the catalytic machinery, where Glu199 and His440 sit near the active serine and shape the catalytic floor; backbone glycines of the catalytic loop (Gly117, Gly118) help line this floor, with the true oxyanion hole (Gly118/Gly119/Ala201 backbone amides) lying nearby to stabilize the substrate transition state. The \"anionic\" subsite that cradles tacrine is built from the indole of Trp84, reinforced by Phe330, with Tyr334, Trp432 and Tyr442 lining the aromatic walls. Backbone contacts from Gly441, Ile439, Gly118, Gly117 and Gly80 shape the narrow channel, so the inhibitor is gripped chiefly by pi-stacking and snug van der Waals packing rather than a classic charged ion pair.",
+   "beats": [
+    {
+     "phase": "approach",
+     "title": "A flat acridine drifts toward the enzyme",
+     "caption": "Tacrine tumbles out of solvent toward the towering surface of acetylcholinesterase, drawn to a dark mouth in the protein where a narrow gorge plunges inward. Its 15 atoms form a rigid, planar plate ideal for sliding into tight aromatic spaces."
+    },
+    {
+     "phase": "surface_scan",
+     "title": "Skimming the rim of the active-site gorge",
+     "caption": "The ligand grazes the entrance of the ~20 A aromatic gorge, sampling the electrostatic funnel that normally steers acetylcholine inward. Surface aromatics flicker past as it searches for the way down."
+    },
+    {
+     "phase": "pocket_detection",
+     "title": "The aromatic chasm opens below",
+     "caption": "A deep, solvent-excluded channel lined with indole and phenol rings is detected, descending toward the catalytic floor. Tacrine commits to the gorge, its flat face oriented to thread the constriction."
+    },
+    {
+     "phase": "first_candidate",
+     "title": "First docking near the gorge mouth",
+     "caption": "Tacrine settles into an early pose high in the gorge, brushing Tyr334 and the outer aromatic lining. The fit is loose and the ring sits off-axis, leaving the deep anionic subsite empty."
+    },
+    {
+     "phase": "rejection",
+     "title": "Too shallow: Trp84 stays uncovered",
+     "caption": "The shallow pose leaves the indole of Trp84 unstacked and His440 untouched at the gorge floor, so the binding energy is poor and the candidate is rejected. Tacrine must descend deeper to reach the catalytic anionic subsite."
+    },
+    {
+     "phase": "reorientation",
+     "title": "Rotating to lie flat for stacking",
+     "caption": "The acridine pivots and slides downward, aligning its plane parallel to the Trp84 indole and squeezing past Phe330. This reorientation trades surface contact for a deep, face-to-face aromatic embrace."
+    },
+    {
+     "phase": "interaction_discovery",
+     "title": "Trp84 grips, His440 hydrogen bonds",
+     "caption": "The ring locks into a parallel pi-stack against Trp84 (3.76 A), buttressed by Phe330 (3.94 A) and Trp432, while the protonated acridine nitrogen forms a hydrogen bond toward His440 at 3.24 A. The catalytic gorge has captured the inhibitor."
+    },
+    {
+     "phase": "refinement",
+     "title": "Tightening into the channel-lining glycines",
+     "caption": "Small adjustments perfect van der Waals contacts with Gly118 (3.65 A), Gly117, Ile439 and Gly441 lining the channel, while Tyr334 caps the aromatic sandwich. Every gorge wall closes snugly around the flat plate."
+    },
+    {
+     "phase": "final_pose",
+     "title": "Tacrine wedged against Trp84 and His440",
+     "caption": "The final pose seats tacrine deep in the anionic subsite, pi-stacked on Trp84 and Phe330 and hydrogen-bonded to His440, blockading acetylcholine's path to the catalytic triad. The reversible, competitive inhibitor is locked in place."
+    }
+   ],
+   "residue_notes": [
+    {
+     "resn": "GLU",
+     "resi": "199",
+     "role": "Acidic residue near the catalytic floor that helps shape the active-site electrostatics and stabilize the positively charged ligand/transition state."
+    },
+    {
+     "resn": "HIS",
+     "resi": "440",
+     "role": "Catalytic-triad histidine that normally activates the serine nucleophile; here it hydrogen-bonds to the protonated acridine nitrogen of tacrine."
+    },
+    {
+     "resn": "TRP",
+     "resi": "84",
+     "role": "Key indole of the anionic subsite that forms the central pi-stacking platform cradling tacrine's flat ring."
+    },
+    {
+     "resn": "PHE",
+     "resi": "330",
+     "role": "Aromatic gorge residue that sandwiches the acridine ring opposite Trp84, completing the aromatic clamp."
+    },
+    {
+     "resn": "TRP",
+     "resi": "432",
+     "role": "Aromatic wall residue that contributes additional pi-stacking and packing against the bound ligand."
+    },
+    {
+     "resn": "GLY",
+     "resi": "441",
+     "role": "Small backbone residue lining the deep channel, allowing tight van der Waals contact with the inhibitor."
+    },
+    {
+     "resn": "GLY",
+     "resi": "118",
+     "role": "Backbone glycine of the catalytic-floor loop near the oxyanion hole (Gly118/Gly119/Ala201); here its backbone packs against the ligand in a hydrophobic contact."
+    },
+    {
+     "resn": "TYR",
+     "resi": "334",
+     "role": "Phenolic gorge residue that caps the aromatic sandwich and lines the upper channel walls."
+    },
+    {
+     "resn": "TYR",
+     "resi": "442",
+     "role": "Aromatic residue near the catalytic base contributing to the hydrophobic, ring-rich lining of the gorge."
+    },
+    {
+     "resn": "ILE",
+     "resi": "439",
+     "role": "Hydrophobic residue providing snug van der Waals packing along the narrow gorge."
+    },
+    {
+     "resn": "GLY",
+     "resi": "117",
+     "role": "Backbone glycine of the catalytic loop that helps constrict the channel around the ligand."
+    },
+    {
+     "resn": "GLY",
+     "resi": "80",
+     "role": "Small residue at the gorge lining that permits close backbone contact and shapes the narrow approach to the active site."
+    }
+   ],
+   "interaction_notes": [
+    {
+     "resn": "HIS",
+     "resi": "440",
+     "type": "hydrogen_bond",
+     "note": "At 3.24 A, the catalytic histidine accepts a hydrogen bond from the protonated acridine nitrogen, anchoring tacrine at the floor of the gorge and obstructing the catalytic triad."
+    },
+    {
+     "resn": "TRP",
+     "resi": "84",
+     "type": "pi_stacking",
+     "note": "Primary 3.76 A face-to-face pi-stack between the Trp84 indole and the acridine ring; this is the dominant interaction defining the anionic-subsite pose."
+    },
+    {
+     "resn": "PHE",
+     "resi": "330",
+     "type": "pi_stacking",
+     "note": "Aromatic stacking at 3.94 A on the opposite face of the ligand, sandwiching tacrine between Trp84 and Phe330."
+    },
+    {
+     "resn": "TRP",
+     "resi": "432",
+     "type": "pi_stacking",
+     "note": "Secondary aromatic contact at 4.31 A that reinforces the ring-stacking cage of the gorge."
+    },
+    {
+     "resn": "GLY",
+     "resi": "441",
+     "type": "hydrophobic",
+     "note": "Backbone van der Waals contact at 3.64 A that tightens packing along the deep channel."
+    },
+    {
+     "resn": "GLY",
+     "resi": "118",
+     "type": "hydrophobic",
+     "note": "Close 3.65 A backbone contact from a catalytic-floor glycine, snugging the ligand against the gorge base."
+    },
+    {
+     "resn": "TYR",
+     "resi": "334",
+     "type": "pi_stacking",
+     "note": "Longer-range 4.91 A aromatic interaction that caps the aromatic sandwich and helps orient the ligand in the upper gorge."
+    },
+    {
+     "resn": "ILE",
+     "resi": "439",
+     "type": "hydrophobic",
+     "note": "Hydrophobic packing at 3.96 A that fills the narrow gorge and excludes solvent around the ligand."
+    },
+    {
+     "resn": "GLY",
+     "resi": "117",
+     "type": "hydrophobic",
+     "note": "Backbone contact at 3.99 A from the catalytic loop that constricts the channel against the acridine plate."
+    },
+    {
+     "resn": "GLY",
+     "resi": "80",
+     "type": "hydrophobic",
+     "note": "Peripheral van der Waals contact at 4.07 A lining the approach to the active site and shaping the gorge geometry."
+    }
+   ]
+  },
+  "egfr": {
+   "slug": "egfr",
+   "accurate": false,
+   "issues": [
+    "Gatekeeper mislabeling (substantive): The pack repeatedly calls Thr766 the 'gatekeeper' / 'gatekeeper-adjacent' / 'gatekeeper-region' residue. The true EGFR gatekeeper is Thr790 (the residue mutated in the T790M resistance mutation), using the same mature numbering scheme as Met769/1M17. Thr766 is a hinge/back-pocket-lining threonine, not the gatekeeper. Corrected in pocket_summary and the Thr766 residue_note. (The 'past/beyond the gatekeeper' phrasing in drug.mechanism and beat 6 is left as-is because the ethynylaniline genuinely extends toward the back pocket past the actual gatekeeper Thr790 region, but the explicit Thr766=gatekeeper equation has been removed.)",
+    "Minor: the Gln767 residue_note's phrase 'near the gatekeeper region' inherits the same gatekeeper confusion; softened to 'near the back of the cleft' to avoid implying Thr766/Gln767 are at the gatekeeper."
+   ],
+   "overview": "EGFR (epidermal growth factor receptor, ErbB1/HER1) is a receptor tyrosine kinase that spans the plasma membrane and detects extracellular growth signals such as EGF and TGF-alpha. Ligand binding drives receptor dimerization and trans-autophosphorylation of the intracellular kinase domain, which fires off the RAS-MAPK, PI3K-AKT, and STAT cascades that govern cell proliferation, survival, and differentiation. The catalytic action of this kinase domain depends on ATP binding in a deep cleft between its N- and C-lobes, the very site captured in the 1M17 structure.",
+   "disease": "Activating mutations and overexpression of EGFR are oncogenic drivers in non-small-cell lung cancer (NSCLC), as well as in glioblastoma, head-and-neck, colorectal, and pancreatic cancers. Constitutive kinase signaling pushes tumor cells toward uncontrolled growth and resistance to apoptosis, which makes the ATP pocket a premier target for small-molecule inhibitors. Blocking this kinase shuts down the downstream proliferative cascades that the tumor has become addicted to.",
+   "drug": {
+    "name": "Erlotinib (Tarceva)",
+    "code": "AQ4",
+    "drug_class": "Reversible ATP-competitive 4-anilinoquinazoline tyrosine kinase inhibitor (first-generation EGFR TKI)",
+    "mechanism": "Erlotinib occupies the ATP-binding cleft between the N- and C-lobes of the EGFR kinase domain. Its quinazoline N1 accepts a hydrogen bond from the Met769 hinge backbone amide, mimicking the adenine of ATP, while the 3-ethynylaniline group reaches into the hydrophobic back pocket past the gatekeeper (Thr790). By competitively excluding ATP, it prevents phosphate transfer and silences receptor autophosphorylation and all downstream signaling."
+   },
+   "pocket_summary": "The binding site is the ATP cleft wedged between the N-lobe and C-lobe of the kinase domain, lined by the hinge, the glycine-rich loop region, and the hydrophobic spine. The hinge residue Met769 is the anchor, donating a backbone hydrogen bond to the quinazoline N1, with neighboring Pro770, Phe771, and Gly772 framing the entrance and the adjacent solvent channel. A hydrophobic floor built from Leu694, Val702, Ala719, Leu764, Leu768, and Leu820 cradles the quinazoline core, while the catalytic Asp831 of the DFG motif together with the hinge-region threonine Thr766 and Gln767 shape the back of the cleft toward the ethynylaniline substituent.",
+   "beats": [
+    {
+     "phase": "approach",
+     "title": "Erlotinib drifts toward the EGFR kinase cleft",
+     "caption": "The quinazoline drug tumbles out of solvent and aligns with the groove between the N- and C-lobes of the EGFR kinase domain. The deep ATP cleft beckons from beyond the glycine-rich loop."
+    },
+    {
+     "phase": "surface_scan",
+     "title": "Skimming the kinase rim for an opening",
+     "caption": "Erlotinib grazes the protein surface, sampling the lobe interface and the solvent-exposed hinge edge near Phe771 and Pro770. Most contacts are fleeting until the cleft mouth comes into view."
+    },
+    {
+     "phase": "pocket_detection",
+     "title": "The ATP pocket opens between the lobes",
+     "caption": "The ligand drops into the cleft normally occupied by ATP, sensing the hydrophobic floor lined by Leu694, Ala719, and Leu820. The Met769 hinge looms as the obvious anchor point."
+    },
+    {
+     "phase": "first_candidate",
+     "title": "A first quinazoline pose settles in",
+     "caption": "Erlotinib lands with its core roughly stacked against the hydrophobic spine, but the ethynylaniline tail collides awkwardly near Thr766 and Asp831. The hinge hydrogen bond is not yet formed."
+    },
+    {
+     "phase": "rejection",
+     "title": "Bad geometry at the hinge is rejected",
+     "caption": "The quinazoline N1 sits too far and mis-angled to accept the backbone hydrogen bond from Met769, and the aniline strains against Leu764. Scoring penalizes the clash and the pose is discarded."
+    },
+    {
+     "phase": "reorientation",
+     "title": "The quinazoline flips to face the hinge",
+     "caption": "Erlotinib rotates so its N1 nitrogen swings toward the Met769 backbone amide and the ethynylaniline pivots into the back pocket beyond the gatekeeper. The core realigns over the Ala719 and Leu768 floor."
+    },
+    {
+     "phase": "interaction_discovery",
+     "title": "Met769 hinge bond snaps into place",
+     "caption": "A 2.7 A hydrogen bond locks the quinazoline N1 to the Met769 backbone, while Pro770, Gly772, and Leu694 add supporting backbone polar contacts and Ala719, Leu764, Phe771, and Leu820 grip the core hydrophobically. The pose suddenly looks like real ATP-competitive binding."
+    },
+    {
+     "phase": "refinement",
+     "title": "Side chains tighten around the anilinoquinazoline",
+     "caption": "Small torsional adjustments optimize the Met769 and Gly772 hydrogen bonds and pack Leu768 and Leu820 snugly against the quinazoline. Val702 and Ala719 close over the ethynyl tail to seal the hydrophobic back pocket."
+    },
+    {
+     "phase": "final_pose",
+     "title": "Erlotinib locked in the EGFR ATP site",
+     "caption": "The final pose mirrors the 1M17 crystal structure: the Met769 hinge hydrogen bond (2.7 A) anchors the quinazoline, reinforced by Pro770, Gly772, and Leu694, with Ala719, Leu764, Phe771, Leu768, and Leu820 cradling the scaffold. ATP is excluded and the kinase is silenced."
+    }
+   ],
+   "residue_notes": [
+    {
+     "resn": "MET",
+     "resi": "769",
+     "role": "Hinge residue whose backbone amide donates the key hydrogen bond to the quinazoline N1, anchoring the inhibitor like the adenine of ATP."
+    },
+    {
+     "resn": "PRO",
+     "resi": "770",
+     "role": "Hinge-adjacent residue that rigidifies the linker region and contributes a backbone polar contact framing the pocket entrance."
+    },
+    {
+     "resn": "ASP",
+     "resi": "831",
+     "role": "Catalytic DFG-motif aspartate at the back of the cleft that normally coordinates the magnesium-ATP complex, shaping the deep wall of the pocket."
+    },
+    {
+     "resn": "GLN",
+     "resi": "767",
+     "role": "Polar residue that helps define the back of the ATP cleft toward the ethynylaniline substituent."
+    },
+    {
+     "resn": "GLY",
+     "resi": "772",
+     "role": "Hinge glycine providing backbone flexibility and a supporting backbone hydrogen-bond contact to the inhibitor at the solvent edge."
+    },
+    {
+     "resn": "LEU",
+     "resi": "694",
+     "role": "Hydrophobic N-lobe residue from the glycine-rich loop region that caps the cleft and makes a close backbone contact with the bound ligand."
+    },
+    {
+     "resn": "ALA",
+     "resi": "719",
+     "role": "Conserved beta-3 alanine forming part of the hydrophobic floor that cradles the quinazoline core."
+    },
+    {
+     "resn": "THR",
+     "resi": "766",
+     "role": "Hinge-region threonine lining the back of the ATP cleft toward the hydrophobic back pocket (distinct from the EGFR gatekeeper Thr790)."
+    },
+    {
+     "resn": "LEU",
+     "resi": "764",
+     "role": "Hydrophobic residue lining the cleft that packs against the quinazoline scaffold and the aniline ring."
+    },
+    {
+     "resn": "PHE",
+     "resi": "771",
+     "role": "Aromatic hinge-edge residue framing the pocket mouth and providing a hydrophobic surface for the inhibitor."
+    },
+    {
+     "resn": "LEU",
+     "resi": "820",
+     "role": "C-lobe leucine forming part of the hydrophobic floor that grips the underside of the quinazoline core."
+    },
+    {
+     "resn": "LEU",
+     "resi": "768",
+     "role": "Hydrophobic hinge-region leucine that packs snugly against the quinazoline ring system to stabilize the pose."
+    }
+   ],
+   "interaction_notes": [
+    {
+     "resn": "MET",
+     "resi": "769",
+     "type": "hydrogen_bond",
+     "note": "Primary 2.7 A hinge hydrogen bond from the backbone amide to the quinazoline N1, the dominant anchoring interaction that mimics ATP-adenine binding."
+    },
+    {
+     "resn": "PRO",
+     "resi": "770",
+     "type": "hydrogen_bond",
+     "note": "Supporting 3.21 A backbone hydrogen bond near the hinge that reinforces the ligand's grip at the pocket entrance."
+    },
+    {
+     "resn": "GLY",
+     "resi": "772",
+     "type": "hydrogen_bond",
+     "note": "Auxiliary 3.24 A backbone hinge hydrogen bond at the solvent-exposed edge that helps orient the inhibitor scaffold."
+    },
+    {
+     "resn": "LEU",
+     "resi": "694",
+     "type": "hydrogen_bond",
+     "note": "Backbone hydrogen bond at 3.27 A from the N-lobe loop that caps the cleft and stabilizes the bound pose."
+    },
+    {
+     "resn": "ALA",
+     "resi": "719",
+     "type": "hydrophobic",
+     "note": "Hydrophobic contact at 3.31 A from the conserved beta-3 alanine supporting the quinazoline core against the pocket floor."
+    },
+    {
+     "resn": "LEU",
+     "resi": "764",
+     "type": "hydrophobic",
+     "note": "Hydrophobic packing at 3.43 A that snugs the cleft wall against the quinazoline and aniline rings."
+    },
+    {
+     "resn": "PHE",
+     "resi": "771",
+     "type": "hydrophobic",
+     "note": "Hydrophobic contact at 3.45 A from the aromatic hinge-edge residue framing the pocket mouth."
+    },
+    {
+     "resn": "LEU",
+     "resi": "820",
+     "type": "hydrophobic",
+     "note": "Hydrophobic contact at 3.45 A from the C-lobe floor gripping the underside of the quinazoline scaffold."
+    },
+    {
+     "resn": "LEU",
+     "resi": "768",
+     "type": "hydrophobic",
+     "note": "Hydrophobic packing at 3.50 A that stabilizes the quinazoline ring system against the hinge region."
+    },
+    {
+     "resn": "VAL",
+     "resi": "702",
+     "type": "hydrophobic",
+     "note": "Longer-range hydrophobic contact at 4.19 A that helps seal the back pocket around the ethynyl tail."
+    }
+   ]
+  },
+  "bace1": {
+   "slug": "bace1",
+   "accurate": true,
+   "issues": [],
+   "overview": "BACE1 (beta-site amyloid precursor protein cleaving enzyme 1, beta-secretase) is a membrane-anchored aspartic protease that performs the first and rate-limiting proteolytic cut of the amyloid precursor protein (APP). Like all pepsin-family aspartic proteases, it uses a catalytic dyad of two aspartates that activate a water molecule to hydrolyze the substrate's scissile peptide bond. Cleavage of APP by BACE1 releases the membrane-bound C99 fragment, which gamma-secretase then processes into the amyloid-beta peptide.",
+   "disease": "BACE1 sits at the very start of the amyloid cascade implicated in Alzheimer's disease: its cleavage of APP is obligatory for generating the aggregation-prone amyloid-beta (Abeta) peptides that accumulate into plaques. Because blocking this single enzyme should shut off Abeta production at its source, BACE1 became one of the most intensively pursued targets in neurodegeneration drug discovery. The 1FKN structure, with the OM99-2 peptidomimetic bound, was the first atomic-resolution view of the active site and the template for a generation of transition-state-mimicking inhibitors.",
+   "drug": {
+    "name": "OM99-2 (hydroxyethylene transition-state isostere core)",
+    "code": "1OL",
+    "drug_class": "peptidomimetic transition-state-analog aspartic protease inhibitor",
+    "mechanism": "The hydroxyethylene isostere replaces the scissile peptide bond with a non-hydrolyzable C-OH that mimics the tetrahedral gem-diol intermediate of peptide hydrolysis; its central hydroxyl chelates the catalytic aspartate dyad (Asp32 and Asp228), locking the enzyme in a dead-end, non-productive complex and competitively blocking substrate cleavage."
+   },
+   "pocket_summary": "The active site is a long substrate-groove cleft sealed under a mobile beta-hairpin flap and centered on the catalytic aspartic dyad, Asp32 and Asp228, which sit face-to-face at the base of the pocket. The inhibitor's central hydroxyl bridges both aspartates, while flanking subsites read out the peptidomimetic side chains: a polar shelf formed by Thr72, Gln73 and the Gly230/Thr231 strand hydrogen-bonds the backbone, and an aromatic/hydrophobic wall built from Tyr71, Phe108, Leu30, Ile118 and Ile226 packs the apolar substituents. Gly34 and Gly230 provide the conformational give that lets the flap close down over the bound ligand.",
+   "beats": [
+    {
+     "phase": "approach",
+     "title": "A protease surfaces from the membrane",
+     "caption": "The ligand drifts in toward the extracellular catalytic domain of BACE1, the enzyme that strikes the first cut into amyloid precursor protein. Ahead lies a long cleft shadowed by a mobile beta-hairpin flap."
+    },
+    {
+     "phase": "surface_scan",
+     "title": "Tracing the substrate groove",
+     "caption": "Skimming the surface, the inhibitor follows the elongated channel that normally cradles an extended peptide substrate. Aromatic edges from Tyr71 and Phe108 flag the entrance to the buried active site."
+    },
+    {
+     "phase": "pocket_detection",
+     "title": "Two aspartates beckon at the floor",
+     "caption": "Deep in the cleft the catalytic dyad Asp32 and Asp228 face each other across a pocket of water. Their paired carboxylates mark the exact spot where the scissile bond would be hydrolyzed."
+    },
+    {
+     "phase": "first_candidate",
+     "title": "A first plunge into the dyad",
+     "caption": "The hydroxyethylene core dives toward the aspartates, its central hydroxyl reaching for the catalytic water site. The flanking side chains, however, are still splayed away from their subsites."
+    },
+    {
+     "phase": "rejection",
+     "title": "Misread subsites force a retreat",
+     "caption": "In this pose the peptidomimetic arms clash with the hydrophobic wall and miss the polar shelf, leaving Thr72 and Gly230 unsatisfied and Tyr71 unable to stack. The high-energy fit is rejected and the ligand backs out."
+    },
+    {
+     "phase": "reorientation",
+     "title": "Flipping to read the cleft",
+     "caption": "The molecule rotates so its backbone runs antiparallel along the groove, aligning each side chain with its intended subsite. The flap relaxes over Gly34 and Gly230, opening room for a closer approach."
+    },
+    {
+     "phase": "interaction_discovery",
+     "title": "The transition state snaps into place",
+     "caption": "The central hydroxyl now bridges both Asp32 (2.44 A) and Asp228 (2.56 A), while backbone hydrogen bonds lock onto Gly230 and Thr72 and Tyr71 stacks face-on with the ligand's aromatic. A textbook tetrahedral-intermediate mimic emerges."
+    },
+    {
+     "phase": "refinement",
+     "title": "Tightening against the hydrophobic wall",
+     "caption": "Small adjustments settle the apolar substituents against Leu30, Ile226 and Phe108, sharpening the pi-stacking and van der Waals contacts. Gly34 flexes to relieve the last steric strain across the floor of the pocket."
+    },
+    {
+     "phase": "final_pose",
+     "title": "A dead-end complex, catalysis frozen",
+     "caption": "The hydroxyl stays clamped between Asp32 and Asp228 with the flap shut tight, holding BACE1 in a non-productive state. With Thr72, Gly230 and the Tyr71/Phe108 aromatics all engaged, the inhibitor mimics the uncleavable transition state and halts amyloid-beta production at its source."
+    }
+   ],
+   "residue_notes": [
+    {
+     "resn": "ASP",
+     "resi": "32",
+     "role": "Half of the catalytic aspartic dyad; its carboxylate activates the lytic water and directly chelates the inhibitor's transition-state hydroxyl."
+    },
+    {
+     "resn": "ASP",
+     "resi": "228",
+     "role": "The second catalytic aspartate, paired with Asp32; together they form the dyad that the hydroxyethylene isostere bridges and neutralizes."
+    },
+    {
+     "resn": "GLY",
+     "resi": "230",
+     "role": "Backbone-strand residue just past the dyad that donates/accepts a main-chain hydrogen bond to the ligand, anchoring its central segment."
+    },
+    {
+     "resn": "THR",
+     "resi": "72",
+     "role": "Polar flap/loop residue that hydrogen-bonds the inhibitor backbone, helping seal the flap over the bound peptidomimetic."
+    },
+    {
+     "resn": "TYR",
+     "resi": "71",
+     "role": "Conserved flap tyrosine that pi-stacks against an inhibitor aromatic and helps gate substrate access to the dyad."
+    },
+    {
+     "resn": "GLY",
+     "resi": "34",
+     "role": "Small glycine near Asp32 that provides conformational flexibility at the pocket floor, accommodating the bulky transition-state core."
+    },
+    {
+     "resn": "GLN",
+     "resi": "73",
+     "role": "Polar S2-subsite residue adjacent to Thr72 that lines the cleft and hydrogen-bonds peptidomimetic side chains and backbone."
+    },
+    {
+     "resn": "PHE",
+     "resi": "108",
+     "role": "Aromatic wall residue forming part of the S1/S3 hydrophobic shelf; pi-stacks with and packs against the inhibitor's apolar groups."
+    },
+    {
+     "resn": "THR",
+     "resi": "231",
+     "role": "Part of the Gly230/Thr231 strand below the dyad that frames the prime-side subsites and supports backbone recognition."
+    },
+    {
+     "resn": "LEU",
+     "resi": "30",
+     "role": "Hydrophobic residue lining an S1-type subpocket that makes van der Waals contact with an inhibitor apolar substituent."
+    },
+    {
+     "resn": "ILE",
+     "resi": "226",
+     "role": "Branched hydrophobic residue contributing to the apolar wall that packs a non-prime-side ligand side chain."
+    },
+    {
+     "resn": "ILE",
+     "resi": "118",
+     "role": "Buried hydrophobic residue helping shape the substrate groove and providing van der Waals contacts to the bound core."
+    }
+   ],
+   "interaction_notes": [
+    {
+     "resn": "ASP",
+     "resi": "32",
+     "type": "hydrogen_bond",
+     "note": "At 2.44 A, this is the tightest contact: the catalytic aspartate hydrogen-bonds the central transition-state hydroxyl, the linchpin of the dead-end complex."
+    },
+    {
+     "resn": "ASP",
+     "resi": "228",
+     "type": "hydrogen_bond",
+     "note": "A 2.56 A hydrogen bond from the second dyad aspartate to the same hydroxyl completes the bidentate chelation that mimics the tetrahedral intermediate."
+    },
+    {
+     "resn": "GLY",
+     "resi": "230",
+     "type": "hydrogen_bond",
+     "note": "A 2.91 A main-chain hydrogen bond that registers the inhibitor backbone against the strand below the dyad, fixing its position in the groove."
+    },
+    {
+     "resn": "THR",
+     "resi": "72",
+     "type": "hydrogen_bond",
+     "note": "A 2.93 A flap-region hydrogen bond that helps clamp the flap shut over the ligand and reinforces backbone recognition."
+    },
+    {
+     "resn": "TYR",
+     "resi": "71",
+     "type": "pi_stacking",
+     "note": "A 3.9 A face-on aromatic stack between the flap tyrosine and an inhibitor ring, adding selectivity and helping seal the active site."
+    },
+    {
+     "resn": "GLY",
+     "resi": "34",
+     "type": "hydrophobic",
+     "note": "A 3.57 A close apolar contact at the pocket floor; the small glycine yields just enough to accommodate the bulky isostere core."
+    },
+    {
+     "resn": "PHE",
+     "resi": "108",
+     "type": "pi_stacking",
+     "note": "A 4.73 A aromatic stacking/edge contact that buttresses the hydrophobic wall and packs an inhibitor aromatic substituent."
+    },
+    {
+     "resn": "LEU",
+     "resi": "30",
+     "type": "hydrophobic",
+     "note": "A 4.04 A van der Waals contact lining an S1-type subpocket that grips an apolar side chain of the peptidomimetic."
+    },
+    {
+     "resn": "ILE",
+     "resi": "226",
+     "type": "hydrophobic",
+     "note": "A 4.04 A van der Waals contact from the branched isoleucine that helps complete the apolar enclosure of a non-prime ligand substituent."
+    }
+   ]
+  },
+  "cox2": {
+   "slug": "cox2",
+   "accurate": true,
+   "issues": [],
+   "overview": "Cyclooxygenase-2 (COX-2, prostaglandin-endoperoxide synthase 2) is a membrane-anchored, heme-containing bifunctional oxidoreductase that catalyzes the committed step of prostanoid biosynthesis. Its cyclooxygenase active site converts arachidonic acid into the hydroperoxy-endoperoxide prostaglandin G2, which is then reduced to PGH2 at the adjacent peroxidase site. PGH2 is the common precursor for downstream prostaglandins, prostacyclin, and thromboxane that drive inflammation, pain, fever, and vascular signaling. Unlike the constitutive COX-1 isozyme, COX-2 is inducible, switched on at sites of inflammation by cytokines and growth factors.",
+   "disease": "Because COX-2-derived prostaglandins amplify pain, swelling, and fever, the enzyme is the principal target of anti-inflammatory therapy. Selective COX-2 inhibition treats osteoarthritis, rheumatoid arthritis, and acute pain while sparing the COX-1-dependent gastric mucosa, reducing the ulcers and bleeding seen with traditional NSAIDs. COX-2 is also overexpressed in colorectal and other adenocarcinomas, making it a target for chemoprevention, though chronic blockade carries cardiovascular thrombotic risk by shifting the prostacyclin/thromboxane balance.",
+   "drug": {
+    "name": "SC-558",
+    "code": "S58",
+    "drug_class": "Selective COX-2 inhibitor (coxib; diaryl-heterocycle / 1,5-diarylpyrazole bearing a sulfonamide)",
+    "mechanism": "Reversible, time-dependent competitive inhibitor that occupies the cyclooxygenase channel where arachidonic acid normally binds. Its arylsulfonamide group reaches into the COX-2-specific side pocket gated by Val523, anchoring to the polar Arg513/His90/Gln192 cluster, while the bromophenyl and trifluoromethyl-pyrazole rings fill the hydrophobic channel. This blocks substrate access and the catalytic Tyr385 radical chemistry, halting PGG2 formation with isoform selectivity over COX-1."
+   },
+   "pocket_summary": "The binding site is the long, bent cyclooxygenase channel that runs from the membrane-binding domain up to the catalytic apex. At the mouth, the constriction formed by Arg120, Tyr355, and Glu524 normally salt-bridges carboxylate substrates; here Arg120 and Tyr355 instead engage the inhibitor. A central hydrophobic tunnel lined by Leu352, Val349, Leu359, Phe518, Ala527, and Tyr385 cradles the aryl rings. The defining feature is the COX-2-selective side pocket, opened by the small Val523 gatekeeper (a bulky Ile in COX-1) and walled by Arg513, His90, Gln192, Phe518, and Ala516; the inhibitor's sulfonamide head inserts here. At the apex sits the catalytic Tyr385 beneath the heme, the residue that abstracts hydrogen from arachidonic acid.",
+   "beats": [
+    {
+     "phase": "approach",
+     "title": "Drifting toward the membrane-anchored enzyme",
+     "caption": "SC-558 sweeps in from solvent toward COX-2, whose cyclooxygenase channel opens like a tunnel above the membrane-binding helices. The bromophenyl-pyrazole scaffold tumbles, sensing the electrostatic funnel at the channel mouth."
+    },
+    {
+     "phase": "surface_scan",
+     "title": "Skimming the channel mouth",
+     "caption": "The ligand grazes the lobby guarded by Arg120 and Tyr355, the gate that normally grips arachidonic acid's carboxylate. It samples the rim, reading the contour that descends into the hydrophobic interior."
+    },
+    {
+     "phase": "pocket_detection",
+     "title": "Locating the COX-2 side pocket",
+     "caption": "A side channel yawns open where the small Val523 gatekeeper sits, a feature absent in the bulkier COX-1. The sulfonamide head turns toward this selective sub-pocket lined by Arg513 and His90."
+    },
+    {
+     "phase": "first_candidate",
+     "title": "Slotting in head-first, but crooked",
+     "caption": "SC-558 plunges its aryl rings down the channel toward Tyr385 in a first trial pose. The fit is loose, the sulfonamide dangling shy of its polar partners deep in the side pocket."
+    },
+    {
+     "phase": "rejection",
+     "title": "Clashing against the Val523 gate",
+     "caption": "The trifluoromethyl-pyrazole crowds Phe518 and Val523 while the sulfonamide fails to reach Arg513 (3.15 Angstrom target) or His90 (2.69 Angstrom target). Strained and under-anchored, the pose is rejected and the ligand backs out."
+    },
+    {
+     "phase": "reorientation",
+     "title": "Pivoting the sulfonamide deeper",
+     "caption": "The molecule rotates, swinging its arylsulfonamide fully into the side pocket past Val523 while the bromophenyl ring rolls against Leu352 and Val349. The diaryl scaffold realigns along the hydrophobic tunnel."
+    },
+    {
+     "phase": "interaction_discovery",
+     "title": "The polar cluster locks the sulfonamide",
+     "caption": "The sulfonamide oxygens hydrogen-bond to His90 (2.69 Angstrom) and Arg513 (3.15 Angstrom), while Gln192 (3.39 Angstrom), Tyr355 (3.48 Angstrom), and the Phe518 backbone (3.06 Angstrom) join the network. Above, Tyr385 pi-stacks against an aryl ring at 4.09 Angstrom."
+    },
+    {
+     "phase": "refinement",
+     "title": "Tightening into the hydrophobic channel",
+     "caption": "Side chains settle as Leu352 (3.03 Angstrom), Val523 (3.03 Angstrom), Val349 (3.22 Angstrom), Leu359 (3.34 Angstrom), and Ala527 (3.37 Angstrom) close packing contacts around the aryl rings. Ser353 and Ala516 trim the last gaps as the pose minimizes."
+    },
+    {
+     "phase": "final_pose",
+     "title": "Locked, selective, catalysis silenced",
+     "caption": "SC-558 is anchored: sulfonamide bonded to His90, Arg513, and Gln192 in the Val523-gated side pocket, aryl rings pi-stacked on Tyr385 and buried against Leu352 and Val523. Arachidonic acid is shut out and the Tyr385 radical chemistry is blocked."
+    }
+   ],
+   "residue_notes": [
+    {
+     "resn": "HIS",
+     "resi": "90",
+     "role": "Polar wall of the COX-2 selective side pocket; donates/accepts a hydrogen bond to the inhibitor's sulfonamide head, a key isoform-selectivity contact."
+    },
+    {
+     "resn": "ARG",
+     "resi": "513",
+     "role": "Distinctive COX-2 residue (Histidine in COX-1) deep in the side pocket; hydrogen-bonds the sulfonamide oxygens and underpins selective binding."
+    },
+    {
+     "resn": "ARG",
+     "resi": "120",
+     "role": "Channel-mouth gatekeeper that normally salt-bridges arachidonic acid's carboxylate; here it caps the entrance and orients the bound inhibitor."
+    },
+    {
+     "resn": "LEU",
+     "resi": "352",
+     "role": "Hydrophobic channel-lining residue that packs against the bromophenyl ring, contributing van der Waals stabilization."
+    },
+    {
+     "resn": "VAL",
+     "resi": "523",
+     "role": "The selectivity gatekeeper; its small side chain (bulky Isoleucine in COX-1) opens access to the side pocket the sulfonamide exploits."
+    },
+    {
+     "resn": "PHE",
+     "resi": "518",
+     "role": "Aromatic wall of the side pocket whose backbone forms a hydrogen bond and whose ring shapes the selective sub-pocket around the sulfonamide."
+    },
+    {
+     "resn": "TYR",
+     "resi": "385",
+     "role": "Catalytic tyrosine beneath the heme that abstracts hydrogen from arachidonic acid; pi-stacks with an inhibitor aryl ring, blocking radical chemistry."
+    },
+    {
+     "resn": "TYR",
+     "resi": "355",
+     "role": "Part of the constriction with Arg120; hydrogen-bonds the inhibitor and helps gate the channel entrance."
+    },
+    {
+     "resn": "VAL",
+     "resi": "349",
+     "role": "Hydrophobic channel residue making close van der Waals contact with the diaryl scaffold."
+    },
+    {
+     "resn": "LEU",
+     "resi": "359",
+     "role": "Hydrophobic lining of the cyclooxygenase tunnel that packs against the aryl rings to stabilize the pose."
+    },
+    {
+     "resn": "ALA",
+     "resi": "527",
+     "role": "Small hydrophobic residue near the catalytic apex that allows tight packing of the inhibitor against the channel wall."
+    },
+    {
+     "resn": "GLN",
+     "resi": "192",
+     "role": "Polar residue bordering the side pocket; hydrogen-bonds the sulfonamide and helps define the COX-2-selective polar cluster."
+    }
+   ],
+   "interaction_notes": [
+    {
+     "resn": "HIS",
+     "resi": "90",
+     "type": "hydrogen_bond",
+     "note": "Short 2.69 Angstrom hydrogen bond from the side pocket to the sulfonamide, a primary selectivity-determining anchor."
+    },
+    {
+     "resn": "ARG",
+     "resi": "513",
+     "type": "hydrogen_bond",
+     "note": "3.15 Angstrom hydrogen bond to the sulfonamide oxygens; this COX-2-specific arginine is central to selective inhibition."
+    },
+    {
+     "resn": "LEU",
+     "resi": "352",
+     "type": "hydrophobic",
+     "note": "3.03 Angstrom van der Waals contact cradling the bromophenyl ring in the hydrophobic channel."
+    },
+    {
+     "resn": "VAL",
+     "resi": "523",
+     "type": "hydrophobic",
+     "note": "3.03 Angstrom contact at the selectivity gate; its small side chain admits the inhibitor into the COX-2 side pocket."
+    },
+    {
+     "resn": "PHE",
+     "resi": "518",
+     "type": "hydrogen_bond",
+     "note": "3.06 Angstrom backbone hydrogen bond that helps fix the sulfonamide orientation within the side pocket."
+    },
+    {
+     "resn": "TYR",
+     "resi": "385",
+     "type": "pi_stacking",
+     "note": "4.09 Angstrom aromatic pi-stack with an inhibitor aryl ring that occludes the catalytic tyrosine and blocks substrate oxygenation."
+    },
+    {
+     "resn": "TYR",
+     "resi": "355",
+     "type": "hydrogen_bond",
+     "note": "3.48 Angstrom hydrogen bond at the channel constriction, helping seat and orient the inhibitor at the mouth."
+    },
+    {
+     "resn": "VAL",
+     "resi": "349",
+     "type": "hydrophobic",
+     "note": "3.22 Angstrom van der Waals contact packing the diaryl scaffold against the tunnel wall."
+    },
+    {
+     "resn": "LEU",
+     "resi": "359",
+     "type": "hydrophobic",
+     "note": "3.34 Angstrom hydrophobic contact stabilizing the aryl rings deep in the channel."
+    },
+    {
+     "resn": "ALA",
+     "resi": "527",
+     "type": "hydrophobic",
+     "note": "3.37 Angstrom close packing near the catalytic apex that tightens the inhibitor fit."
+    },
+    {
+     "resn": "GLN",
+     "resi": "192",
+     "type": "hydrogen_bond",
+     "note": "3.39 Angstrom hydrogen bond completing the polar cluster that grips the sulfonamide head."
+    },
+    {
+     "resn": "ALA",
+     "resi": "516",
+     "type": "hydrophobic",
+     "note": "3.48 Angstrom contact lining the side pocket and trimming steric gaps around the sulfonamide."
+    },
+    {
+     "resn": "SER",
+     "resi": "353",
+     "type": "hydrogen_bond",
+     "note": "3.49 Angstrom hydrogen bond at the channel wall that fine-tunes the final bound orientation."
+    }
+   ]
+  }
+ },
+ "tutor": {
+  "interactions": [
+   {
+    "key": "hydrogen_bond",
+    "name": "Hydrogen bond",
+    "definition": "A directional attraction in which a hydrogen atom bonded to an electronegative donor (N, O) is shared with an electronegative acceptor. It is partly electrostatic, partly covalent in character.",
+    "distance": "2.5-3.5 Angstrom (donor-acceptor heavy atoms)",
+    "energy": "-1 to -5 kcal/mol",
+    "why": "Confers specificity and orientation to binding; correctly satisfied H-bonds are a major positive term in scoring functions, while unsatisfied buried donors/acceptors are heavily penalized."
+   },
+   {
+    "key": "hydrophobic",
+    "name": "Hydrophobic interaction",
+    "definition": "The favorable burial of nonpolar surfaces away from water, driven mainly by release of ordered solvent rather than direct atom-atom attraction. It packs greasy ligand groups against nonpolar pocket walls.",
+    "distance": "3.5-5.0 Angstrom (contact of nonpolar atoms)",
+    "energy": "about -0.7 to -1.5 kcal/mol per buried methylene (roughly -0.025 kcal/mol per square Angstrom)",
+    "why": "Often the largest driver of affinity for lipophilic ligands; scoring functions reward buried nonpolar surface area, which boosts potency but can hurt solubility."
+   },
+   {
+    "key": "pi_stacking",
+    "name": "Pi-pi stacking",
+    "definition": "An attraction between aromatic ring systems via overlapping pi electron clouds, in parallel-displaced (offset) or T-shaped (edge-to-face) geometries. True face-to-face eclipsed stacking is usually less favorable.",
+    "distance": "3.4-4.0 Angstrom between ring planes (centroid offset ~1.5-2.5 Angstrom)",
+    "energy": "-1 to -3 kcal/mol",
+    "why": "Stabilizes aromatic ligands against aromatic residues (Phe, Tyr, Trp, His), adding affinity and locking ring orientation, which scoring functions reward with geometry-dependent aromatic terms."
+   },
+   {
+    "key": "salt_bridge",
+    "name": "Salt bridge",
+    "definition": "A combined electrostatic plus hydrogen-bonding interaction between oppositely charged ionized groups, e.g. a protonated amine and a carboxylate. It is a particularly strong, short-range ionic contact.",
+    "distance": "2.8-4.0 Angstrom (between charged heavy atoms)",
+    "energy": "-1 to -5 kcal/mol (context dependent; weaker when solvent-exposed)",
+    "why": "Provides strong, specific anchoring of charged ligand groups; scoring functions reward it but must offset the large desolvation cost of burying the charges."
+   },
+   {
+    "key": "vdw",
+    "name": "Van der Waals interaction",
+    "definition": "Weak, short-range attraction from transient induced dipoles (London dispersion) that becomes strongly repulsive once atoms overlap. Modeled by a Lennard-Jones-type potential with a shallow attractive well.",
+    "distance": "3.3-4.5 Angstrom (near the sum of van der Waals radii)",
+    "energy": "about -0.1 to -0.5 kcal/mol per atom pair (summed over many contacts)",
+    "why": "Individually tiny but cumulatively large for well-packed poses; the repulsive wall enforces shape complementarity and prevents atomic overlap in docking."
+   },
+   {
+    "key": "metal_coordination",
+    "name": "Metal coordination",
+    "definition": "A dative bond in which lone-pair donor atoms of the ligand (N, O, S) coordinate a metal ion (e.g. Zn2+, Mg2+, Fe) held in the binding site. Geometry is defined by the metal's preferred coordination number.",
+    "distance": "1.8-2.5 Angstrom (ligand donor to metal)",
+    "energy": "-5 to -20 kcal/mol (strong, often dominant)",
+    "why": "Central to metalloenzyme inhibitors (e.g. zinc-binding groups in proteases); requires specialized scoring terms because standard force fields underestimate these strong, directional bonds."
+   },
+   {
+    "key": "electrostatic_attraction",
+    "name": "Electrostatic attraction",
+    "definition": "The long-range Coulombic attraction between opposite partial or formal charges, scaled by the local dielectric environment. Acts over greater distances than contact interactions.",
+    "distance": "Effective up to ~8-10 Angstrom (decays as 1/r, dielectric-screened)",
+    "energy": "-1 to -5 kcal/mol (highly dependent on charges and dielectric)",
+    "why": "Guides ligand approach and orientation and stabilizes complementary charge pairing; scoring functions model it with a Coulomb term, sensitive to the assumed dielectric and protonation states."
+   },
+   {
+    "key": "electrostatic_repulsion",
+    "name": "Electrostatic repulsion",
+    "definition": "The unfavorable Coulombic interaction between like charges (positive-positive or negative-negative) brought into proximity. It is the destabilizing counterpart of electrostatic attraction.",
+    "distance": "Significant within ~8-10 Angstrom (decays as 1/r)",
+    "energy": "+1 to +5 kcal/mol (destabilizing)",
+    "why": "Penalizes poses that mispair charges or bury same-sign groups; recognizing it helps reject incorrect poses and explains lost affinity from charge clashes."
+   },
+   {
+    "key": "steric_clash",
+    "name": "Steric clash",
+    "definition": "A severe van der Waals repulsion that occurs when two atoms are forced closer than their combined radii allow, causing electron-cloud overlap. It is the steep repulsive wall of the Lennard-Jones potential.",
+    "distance": "Below ~2.5-3.0 Angstrom for non-bonded heavy atoms (overlap of vdW radii)",
+    "energy": "Large and positive, +5 kcal/mol to tens of kcal/mol",
+    "why": "A dominant filter in docking: clashing poses receive huge energy penalties and are discarded, so detecting clashes is essential for generating physically valid geometries."
+   }
+  ],
+  "concepts": [
+   {
+    "key": "pose",
+    "name": "Pose",
+    "explanation": "A specific 3D placement of a ligand in the binding site, defined by its position, orientation, and internal conformation (torsions). Docking generates and ranks many candidate poses to predict the likely binding mode."
+   },
+   {
+    "key": "scoring_function",
+    "name": "Scoring function",
+    "explanation": "A mathematical model that estimates how good a pose is by summing energy-like terms (H-bonds, hydrophobic contacts, electrostatics, clashes, and penalties). It is used to rank poses and to approximate binding affinity, trading physical accuracy for speed."
+   },
+   {
+    "key": "shape_complementarity",
+    "name": "Shape complementarity",
+    "explanation": "How well the ligand's surface geometry matches the contours of the binding pocket, like a hand in a glove. Good complementarity maximizes favorable contacts without steric clashes and is a hallmark of strong, specific binding."
+   },
+   {
+    "key": "druggability",
+    "name": "Druggability",
+    "explanation": "The likelihood that a binding pocket can bind a small, drug-like molecule tightly enough to modulate its target. Druggable pockets tend to be well-defined, enclosed, and suitably hydrophobic, whereas flat or highly polar surfaces are hard to drug."
+   },
+   {
+    "key": "desolvation",
+    "name": "Desolvation",
+    "explanation": "The energetic cost of stripping ordered water molecules off the ligand and pocket surfaces before they can make direct contact. Burying polar or charged groups is especially costly, so favorable interactions must outweigh this penalty for net binding."
+   },
+   {
+    "key": "entropy_penalty",
+    "name": "Entropy penalty",
+    "explanation": "The loss of freedom when a flexible ligand and protein become rigid upon binding, freezing rotatable bonds and restricting motion. This unfavorable entropy change opposes binding, which is why rigidifying a ligand can improve potency."
+   },
+   {
+    "key": "conformational_search",
+    "name": "Conformational search",
+    "explanation": "The process of exploring the many possible shapes (torsion angles) and placements a ligand can adopt in the pocket. Effective sampling is essential because the docking program can only score poses it actually generates."
+   },
+   {
+    "key": "induced_fit",
+    "name": "Induced fit",
+    "explanation": "The adjustment of protein side chains or loops to accommodate a bound ligand, so the pocket is not perfectly rigid. Accounting for this flexibility improves predictions but greatly enlarges the search space."
+   },
+   {
+    "key": "binding_affinity",
+    "name": "Binding affinity",
+    "explanation": "The strength of the ligand-protein interaction, commonly expressed as a dissociation constant (Kd) or as a free energy of binding (delta G). Lower Kd and more negative delta G mean tighter binding; scoring functions try to approximate this value."
+   },
+   {
+    "key": "pocket_occupancy",
+    "name": "Pocket occupancy",
+    "explanation": "How completely the ligand fills the available volume of the binding site. Higher occupancy generally means more favorable contacts, but overfilling causes clashes while underfilling leaves unproductive empty space or trapped water."
+   }
+  ],
+  "residue_classes": [
+   {
+    "resn": "ALA",
+    "name": "Alanine",
+    "property": "nonpolar",
+    "role": "Its small methyl side chain makes weak hydrophobic contacts and is often a neutral filler at the binding interface."
+   },
+   {
+    "resn": "ARG",
+    "name": "Arginine",
+    "property": "positively charged",
+    "role": "Its guanidinium group forms salt bridges and multiple hydrogen bonds with negatively charged or acceptor groups on the ligand."
+   },
+   {
+    "resn": "ASN",
+    "name": "Asparagine",
+    "property": "polar",
+    "role": "Its amide side chain acts as both hydrogen-bond donor and acceptor for polar ligand groups."
+   },
+   {
+    "resn": "ASP",
+    "name": "Aspartate",
+    "property": "negatively charged",
+    "role": "Its carboxylate forms salt bridges and hydrogen bonds with positively charged or donor groups on the ligand."
+   },
+   {
+    "resn": "CYS",
+    "name": "Cysteine",
+    "property": "special",
+    "role": "Its thiol can form hydrogen bonds, coordinate metals, or make covalent bonds with electrophilic (covalent) ligands."
+   },
+   {
+    "resn": "GLN",
+    "name": "Glutamine",
+    "property": "polar",
+    "role": "Its amide side chain donates and accepts hydrogen bonds to polar ligand groups, reaching slightly farther than asparagine."
+   },
+   {
+    "resn": "GLU",
+    "name": "Glutamate",
+    "property": "negatively charged",
+    "role": "Its carboxylate forms salt bridges and hydrogen bonds with cationic or donor groups on the ligand."
+   },
+   {
+    "resn": "GLY",
+    "name": "Glycine",
+    "property": "special",
+    "role": "Lacking a side chain, it adds backbone flexibility and lets ligands pack closely against the main chain."
+   },
+   {
+    "resn": "HIS",
+    "name": "Histidine",
+    "property": "positively charged",
+    "role": "Its imidazole can hydrogen bond, pi-stack, coordinate metals, or carry a positive charge depending on protonation, making it highly versatile in binding."
+   },
+   {
+    "resn": "ILE",
+    "name": "Isoleucine",
+    "property": "nonpolar",
+    "role": "Its branched aliphatic side chain provides hydrophobic packing against lipophilic ligand groups."
+   },
+   {
+    "resn": "LEU",
+    "name": "Leucine",
+    "property": "nonpolar",
+    "role": "Its bulky aliphatic side chain lines hydrophobic pockets and makes van der Waals contacts with nonpolar ligand atoms."
+   },
+   {
+    "resn": "LYS",
+    "name": "Lysine",
+    "property": "positively charged",
+    "role": "Its terminal ammonium forms salt bridges and hydrogen bonds with negatively charged or acceptor ligand groups."
+   },
+   {
+    "resn": "MET",
+    "name": "Methionine",
+    "property": "nonpolar",
+    "role": "Its flexible thioether side chain makes hydrophobic contacts and its sulfur can engage in weak polar or metal interactions."
+   },
+   {
+    "resn": "PHE",
+    "name": "Phenylalanine",
+    "property": "aromatic",
+    "role": "Its phenyl ring drives pi-stacking with aromatic ligands and contributes hydrophobic surface to the pocket."
+   },
+   {
+    "resn": "PRO",
+    "name": "Proline",
+    "property": "special",
+    "role": "Its rigid ring constrains backbone geometry, shaping the pocket and making limited hydrophobic contacts."
+   },
+   {
+    "resn": "SER",
+    "name": "Serine",
+    "property": "polar",
+    "role": "Its hydroxyl acts as a hydrogen-bond donor or acceptor to polar ligand groups and can be part of catalytic sites."
+   },
+   {
+    "resn": "THR",
+    "name": "Threonine",
+    "property": "polar",
+    "role": "Its hydroxyl-bearing side chain hydrogen bonds with polar ligand groups while its methyl adds modest hydrophobic contact."
+   },
+   {
+    "resn": "TRP",
+    "name": "Tryptophan",
+    "property": "aromatic",
+    "role": "Its large indole ring supports pi-stacking, cation-pi, and hydrophobic interactions, and its NH can hydrogen bond."
+   },
+   {
+    "resn": "TYR",
+    "name": "Tyrosine",
+    "property": "aromatic",
+    "role": "Its phenol ring enables pi-stacking and hydrophobic contact while the hydroxyl provides hydrogen bonding."
+   },
+   {
+    "resn": "VAL",
+    "name": "Valine",
+    "property": "nonpolar",
+    "role": "Its small branched aliphatic side chain provides compact hydrophobic packing against nonpolar ligand groups."
+   }
+  ]
+ }
+}

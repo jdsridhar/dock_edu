@@ -1,0 +1,18 @@
+# Visual Molecular Docking Simulator — runtime dependencies
+
+# Core (required)
+streamlit>=1.30
+plotly>=5.18
+numpy>=1.24
+
+# Upload support only — parses MOL/SDF/MOL2 ligands (a manual parser is used as a
+# fallback if RDKit is absent, so the app still runs without it).
+rdkit>=2023.9
+
+# Bundled — nothing to install at runtime:
+#   3Dmol.js        -> assets/js/3Dmol-min.js   (inlined into the viewer)
+#   case-study PDBs -> assets/structures/*.pdb   (trimmed from RCSB)
+#   verified text   -> assets/content.json
+#
+# Intentionally NOT required: py3Dmol (3Dmol.js is bundled), pandas, biopython,
+# openbabel.
