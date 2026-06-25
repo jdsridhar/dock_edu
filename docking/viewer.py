@@ -36,6 +36,8 @@ def build_workspace_html(record, traj, pack, tutor, options, height=940):
             "display": record["display"], "source_pdb": record["source_pdb"],
             "family": record["family"], "ligand_name": record["ligand_name"],
             "is_case": record.get("is_case", False),
+            "computed": traj.get("computed", False), "rmsd": traj.get("rmsd"),
+            "engine": traj.get("engine"), "exhaustiveness": traj.get("exhaustiveness"),
         },
     }
     # escape "</" so structure text containing "</script>" cannot break out of
@@ -152,6 +154,9 @@ _TEMPLATE = r"""
   .badge{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.08em;
     padding:2px 6px;border-radius:5px;background:#3a2a08;color:#fbbf24;border:1px solid #5b430c;
     vertical-align:middle;margin-left:7px;}
+  .badge.ok{background:#08291c;color:#34d399;border-color:#13513a;}
+  .rmsdchip{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;
+    margin-left:7px;vertical-align:middle;background:#0c1426;border:1px solid var(--line);}
   .drow{display:grid;grid-template-columns:96px 1fr;align-items:center;gap:8px;margin:5px 0;font-size:11px;}
   .drow span{color:var(--mut);}
   .drow select,.drow input[type=range]{width:100%;}
@@ -176,7 +181,7 @@ _TEMPLATE = r"""
   <div id="stage">
     <div id="viewer"></div>
     <div class="loadmsg" id="loadmsg">Rendering molecular scene…</div>
-    <div class="hud" id="hudTitle"><div class="t"><span id="hudName">—</span><span class="badge" title="Synthetic, physically-motivated trajectory for teaching. The endpoint is a real crystallographic pose.">SIMULATED</span></div><div class="s" id="hudSub"></div></div>
+    <div class="hud" id="hudTitle"><div class="t"><span id="hudName">—</span><span class="badge" id="modeBadge" title="">COMPUTED</span><span class="rmsdchip" id="hudRmsd" style="display:none"></span></div><div class="s" id="hudSub"></div></div>
     <div class="hud" id="hudScore"><div class="v" id="hudV">—</div><div class="l">Docking Score (kcal/mol)</div></div>
     <div id="phaseRibbon"><span id="phaseDot"></span><span id="phaseLbl">—</span></div>
     <div id="overlay"><div class="et" id="ovT"></div><div class="ec" id="ovC"></div></div>
@@ -232,7 +237,8 @@ _TEMPLATE = r"""
       <h3>Frame Inspector</h3>
       <div class="insp" id="insp"></div>
       <div style="font-size:9.5px;color:var(--mut);margin-top:7px;font-style:italic">
-        Translation &amp; rotation are pose deltas toward the real pose; torsions are illustrative.</div>
+        Rigid-body docking: translation &amp; rotation are the searched pose offset; the ligand
+        conformer is fixed, so torsions stay at 0.</div>
     </div>
     <div class="card">
       <h3>Active Interactions <span class="pill" id="iCount">0</span></h3>
@@ -805,6 +811,29 @@ _TEMPLATE = r"""
   document.getElementById('hudName').textContent=META.display;
   document.getElementById('hudSub').textContent=
     (META.is_case?('PDB '+META.source_pdb+' · '):'')+'ligand '+META.ligand_name+' · '+META.family;
+
+  // mode badge: COMPUTED by the real engine vs (legacy) SIMULATED
+  (function(){
+    const badge=document.getElementById('modeBadge'), chip=document.getElementById('hudRmsd');
+    if(META.computed){
+      badge.textContent='COMPUTED'; badge.classList.add('ok');
+      badge.title='Pose computed by the rigid-body docking engine (simplified Vina-style scoring, '
+        +'basin-hopping search'+(META.exhaustiveness?(' ×'+META.exhaustiveness):'')+'). '
+        +'The endpoint is the engine’s own lowest-energy pose, not a given answer.';
+    } else {
+      badge.textContent='SIMULATED';
+      badge.title='Synthetic, physically-motivated trajectory for teaching.';
+    }
+    if(META.rmsd!=null){
+      const r=META.rmsd, ok=r<2.0, near=r<3.0;
+      chip.style.display='inline-block';
+      chip.textContent='RMSD '+r.toFixed(2)+' Å '+(ok?'✓':(near?'≈':'✗'))+' vs crystal';
+      chip.style.color=ok?'#34d399':(near?'#f59e0b':'#ef4444');
+      chip.style.borderColor=ok?'#13513a':(near?'#5b430c':'#5b1414');
+      chip.title='Root-mean-square deviation of the computed pose from the experimental '
+        +'crystal structure. < 2 Å is the standard re-docking success criterion.';
+    }
+  })();
   document.getElementById('fTot').textContent=N-1;
   document.getElementById('fNow').textContent='0';
 

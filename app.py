@@ -111,9 +111,29 @@ if record is None:
             "Then press **▶ Play** and slow the speed to **0.1x** to study the search.")
     st.stop()
 
+# no ligand to dock — ask for one instead of inventing a fake molecule
+if record.get("needs_ligand"):
+    if record.get("reason") == "ligand_parse_failed":
+        st.error("Couldn't parse the uploaded ligand file. Supported formats: "
+                 "**MOL / SDF / MOL2 / PDB / PDBQT**.")
+    else:
+        het = record.get("het_seen") or []
+        extra = (" The only non-protein groups in this structure are "
+                 + ", ".join(het[:8])
+                 + " — treated as solvent / ions / cofactors, not drug-like ligands.") if het else ""
+        st.warning("**No ligand to dock.** You uploaded a protein but no ligand, and no "
+                   "drug-like ligand is bound in this structure." + extra)
+        st.info("Docking needs a ligand. Upload one (**MOL / SDF / MOL2 / PDB / PDBQT**) in the "
+                "sidebar, or choose a structure that contains a bound inhibitor — e.g. one of the "
+                "built-in case studies, or a protein–ligand complex from the RCSB PDB.")
+    st.stop()
+
 # ---------------------------------------------------------------- build + render
 if record.get("warning"):
     st.warning("⚠️ " + record["warning"])
+if record.get("ligand_source") == "detected":
+    st.info(f"No ligand uploaded — docking **{record['ligand_name']}** "
+            f"({len(record['ligand_coords'])} atoms), the ligand found bound in the uploaded structure.")
 
 try:
     with st.spinner("Generating docking trajectory…"):
@@ -156,7 +176,9 @@ with c2:
             "- Watch the **Live Scoring** bars and **Score Evolution** spike when a pose is rejected and "
             "drop when interactions form.\n"
             "- **Click any residue or the ligand** in 3D — the **AI Tutor** explains it for the current frame.\n"
-            "- The **Frame Inspector** shows translation, rotation, torsions, occupancy and clashes."
+            "- The **COMPUTED** badge + **RMSD** chip (top-left of the viewer) compare the engine's "
+            "pose to the real crystal structure — under **2 Å** means the search rediscovered it.\n"
+            "- The **Frame Inspector** shows translation, rotation, occupancy and clashes."
         )
 
 with st.expander("📈 Trajectory analysis (Plotly)", expanded=False):
@@ -196,10 +218,21 @@ with st.expander("📈 Trajectory analysis (Plotly)", expanded=False):
                        legend=dict(orientation="h", y=-0.25, font=dict(size=10)))
     st.plotly_chart(fig2, use_container_width=True)
 
-    cc1, cc2, cc3 = st.columns(3)
+    cc1, cc2, cc3, cc4 = st.columns(4)
     cc1.metric("Final docking score", f"{traj['final_total']:.2f} kcal/mol")
     cc2.metric("Best score reached", f"{traj['best_total']:.2f} kcal/mol")
     cc3.metric("Key interactions", f"{len(traj['interactions'])}")
+    rmsd = traj.get("rmsd")
+    if rmsd is not None:
+        verdict = "✓ success" if rmsd < 2 else ("≈ near" if rmsd < 3 else "✗ off-target")
+        cc4.metric("RMSD vs crystal", f"{rmsd:.2f} Å", verdict,
+                   delta_color="off", help="Deviation of the engine's computed pose from the "
+                   "experimental crystal structure. < 2 Å is the standard re-docking success bar.")
+    else:
+        cc4.metric("RMSD vs crystal", "—", help="No crystal reference for custom uploads.")
 
-st.caption("Synthetic, physically-motivated trajectories for teaching. Endpoints are real "
-           "crystallographic poses (RCSB PDB). Built with Streamlit · 3Dmol.js · RDKit · Plotly · NumPy.")
+st.caption("Poses are **computed** by a simplified rigid-body docking engine (Vina-style scoring, "
+           "basin-hopping search) — the movie is the real search and the endpoint is the engine's own "
+           "lowest-energy pose, not a pre-set answer. Case studies are validated by **RMSD** against the "
+           "RCSB crystal structure. An educational engine, not a production docker. "
+           "Built with Streamlit · 3Dmol.js · RDKit · Plotly · NumPy.")

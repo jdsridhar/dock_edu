@@ -332,15 +332,29 @@ def build_from_upload(protein_text, protein_fmt, ligand_text=None, ligand_fmt=No
     if not prot_atoms:
         raise ValueError("No protein atoms (standard amino acids) found in the uploaded structure.")
 
-    lig_atoms = None
+    # Resolve a ligand to dock: an uploaded one first, otherwise a real ligand bound
+    # in the structure. We do NOT fabricate one — docking needs a real molecule.
+    lig_atoms, lig_source = None, None
     if ligand_text:
         lig_atoms = parse_ligand(ligand_text, ligand_fmt or "pdb")
+        if lig_atoms:
+            lig_source = "uploaded"
+        else:
+            return {"needs_ligand": True, "reason": "ligand_parse_failed", "is_case": False,
+                    "display": name, "family": "uploaded structure", "source_pdb": "upload"}
     if not lig_atoms:
         het = [a for a in all_atoms if a["rec"] == "HETATM"]
         lig_atoms, _ = detect_ligand(het, prot_atoms)
+        if lig_atoms:
+            lig_source = "detected"
     if not lig_atoms:
-        # No ligand available: place a small probe at the most buried interior point.
-        lig_atoms = _probe_ligand(prot_atoms)
+        # No ligand uploaded and none bound in the structure — ask for one rather
+        # than inventing a fake probe molecule and "docking" it.
+        het_groups = {(a["resn"]) for a in all_atoms if a["rec"] == "HETATM"
+                      and a["resn"] not in WATERS}
+        return {"needs_ligand": True, "reason": "no_ligand", "is_case": False,
+                "display": name, "family": "uploaded structure", "source_pdb": "upload",
+                "het_seen": sorted(het_groups)}
 
     # If the ligand coordinates do not overlap the protein, dock it into the pocket.
     lc = _centroid(lig_atoms)
@@ -377,6 +391,7 @@ def build_from_upload(protein_text, protein_fmt, ligand_text=None, ligand_fmt=No
     return {
         "slug": "custom", "display": name, "family": "uploaded structure",
         "source_pdb": "upload", "is_case": False, "warning": warning,
+        "ligand_source": lig_source,
         "protein_pdb": _protein_pdb_text(prot_atoms),
         "ligand_names": [a["name"] for a in lig_atoms],
         "ligand_elems": [a["elem"] for a in lig_atoms],
@@ -402,12 +417,3 @@ def _estimate_pocket_center(prot_atoms):
     scored.sort(reverse=True, key=lambda t: t[0])
     top = [a for _, a in scored[:8]] or cas[:1]
     return _centroid(top)
-
-
-def _probe_ligand(prot_atoms):
-    c = _estimate_pocket_center(prot_atoms)
-    elems = ["C", "C", "N", "O", "C", "O"]
-    offs = [(0, 0, 0), (1.4, 0, 0), (-0.7, 1.2, 0), (-0.7, -1.2, 0), (0.7, 0, 1.3), (2.1, 0, 1.2)]
-    return [{"rec": "HETATM", "name": e + str(i), "resn": "PRB", "chain": "X", "resi": "1",
-             "x": c[0] + o[0], "y": c[1] + o[1], "z": c[2] + o[2], "elem": e}
-            for i, (e, o) in enumerate(zip(elems, offs))]

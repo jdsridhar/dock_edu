@@ -1,4 +1,26 @@
-# TODO — Visual Molecular Docking Simulator: Review & Fixes
+# TODO — Visual Molecular Docking Simulator
+
+## 🚀 Level 2 — real docking engine (2026-06-25)
+
+The scripted-spline trajectory was **replaced by a real rigid-body docking engine**
+(`docking/engine.py`): a Vina-style scoring function searched with a multi-start
+random-restart swarm + (1+λ) local optimization over the 6 rigid-body DOF. The animated
+path is the actual search; the final pose is **computed**, then RMSD-validated.
+
+- ✅ Engine builds, scores, searches, and packages into the existing viewer format.
+- ✅ All four case studies **redock to 0.3–1.0 Å RMSD**, 5/5 across seeds, ~3–7 s/run.
+- ✅ Search-step budget decoupled from frame count (slerp resampling); batched scoring.
+- ✅ Approach lead-in + real-frame narrative anchoring (clash/reject → H-bond → converge).
+- ✅ UI: `COMPUTED` badge, RMSD-vs-crystal chip, RMSD metric, rigid-body inspector note.
+- ✅ Browser-verified end to end (no console errors); custom-upload path works (no RMSD).
+
+**Phase 2 / 3 ideas (not yet done):** richer event detection from the raw search log; an
+"engine vs. crystal" ghost-pose overlay; an exhaustiveness slider; and **torsional
+flexibility** (rotatable-bond sampling) so the ligand conformer flexes during the search.
+
+---
+
+## Level 1 — Review & Fixes
 
 Status of the review items. **Most are now implemented and browser-verified**
 (2026-06-12). Remaining items are lower-priority polish.
