@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧬 Visual Molecular Docking Simulator</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="An interactive 3D scientific simulation that renders molecular docking as a trajectory movie. Watch molecular recognition happen in real-time.">
+  
+  <!-- Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #05070d;
+      --bg-gradient: radial-gradient(120% 120% at 50% 0%, #0c152b 0%, #05070d 100%);
+      --card-bg: rgba(17, 26, 46, 0.45);
+      --card-border: rgba(31, 43, 69, 0.6);
+      --card-hover-border: rgba(56, 189, 248, 0.5);
+      --txt: #e6edf7;
+      --txt-muted: #8da2c0;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --success: #34d399;
+      --success-glow: rgba(52, 211, 153, 0.1);
+      --warning: #f59e0b;
+      --error: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      background-image: var(--bg-gradient);
+      color: var(--txt);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header styling */
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .banner-container {
+      margin-bottom: 30px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid var(--card-border);
+      display: inline-block;
+      max-width: 100%;
+    }
+
+    .banner-container img {
+      display: block;
+      width: 100%;
+      max-width: 900px;
+      height: auto;
+      object-fit: cover;
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 20px;
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .description {
+      max-width: 800px;
+      margin: 0 auto 30px;
+      color: var(--txt-muted);
+      font-size: 1.05rem;
+    }
+
+    .badges {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .badges img {
+      height: 28px;
+    }
+
+    /* Grid layout */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 60px;
+    }
+
+    /* Card design */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--card-hover-border);
+      box-shadow: 0 12px 40px rgba(56, 189, 248, 0.15);
+    }
+
+    .card-header {
+      margin-bottom: 20px;
+    }
+
+    .case-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    .case-meta {
+      display: flex;
+      gap: 10px;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .chip-pdb {
+      background: rgba(167, 139, 250, 0.15);
+      color: #c084fc;
+      border: 1px solid rgba(167, 139, 250, 0.3);
+    }
+
+    .chip-rmsd {
+      background: var(--success-glow);
+      color: var(--success);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+    }
+
+    .case-description {
+      color: var(--txt-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.95rem;
+      margin-top: 20px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #04121f;
+      border: 1px solid var(--accent);
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: #0284c7;
+      border-color: #0284c7;
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+    }
+
+    /* Local running section */
+    .local-run-section {
+      background: rgba(13, 20, 38, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 50px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .local-run-section h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+
+    .local-run-section p {
+      color: var(--txt-muted);
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+
+    .code-block {
+      background: #07090e;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 18px;
+      font-family: 'Courier New', Courier, monospace;
+      color: var(--accent);
+      overflow-x: auto;
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .code-block::after {
+      content: "Bash";
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 0.75rem;
+      color: var(--txt-muted);
+      text-transform: uppercase;
+    }
+
+    /* Footer styling */
+    footer {
+      text-align: center;
+      color: var(--txt-muted);
+      font-size: 0.9rem;
+      padding-top: 30px;
+      border-top: 1px solid var(--card-border);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      body {
+        padding: 20px 10px;
+      }
+      .local-run-section {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="banner-container">
+        <img src="assets/dock_edu_banner.png" alt="Visual Molecular Docking Simulator Banner">
+      </div>
+      <h1>Visual Molecular Docking Simulator</h1>
+      <div class="tagline">Watch Molecular Recognition Happen</div>
+      
+      <div class="badges">
+        <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white" alt="Streamlit">
+        <img src="https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+        <img src="https://img.shields.io/badge/Bioinformatics-Docking-blueviolet?style=for-the-badge" alt="Bioinformatics">
+        <img src="https://img.shields.io/badge/Offline-Compatible-success?style=for-the-badge" alt="Offline Ready">
+        <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License">
+      </div>
+
+      <p class="description">
+        This is an interactive 3D science workspace that plays molecular docking as a trajectory movie.
+        Instead of showing only the final pose, the simulator calculates and animates the full physics of the search: 
+        random search restarts, steric clash rejections, H-bond formations, and local optimizations.
+      </p>
+    </header>
+
+    <div class="grid">
+      <!-- Acetylcholinesterase -->
+      <div class="card">
+        <div class="card-header">
+          <div class="case-title">Acetylcholinesterase</div>
+          <div class="case-meta">
+            <span class="chip chip-pdb">PDB 1ACJ</span>
+            <span class="chip chip-rmsd">RMSD ~0.3 Å</span>
+          </div>
+          <p class="case-description">
+            Explore Tacrine docking into the aromatic gorge of Acetylcholinesterase. Observe aromatic stacking interactions, steric gorges, and convergence on the crystal binding mode.
+          </p>
+        </div>
+        <a href="static/acetylcholinesterase.html" class="btn btn-primary" target="_blank">▶ Launch Simulator</a>
+      </div>
+
+      <!-- EGFR Kinase -->
+      <div class="card">
+        <div class="card-header">
+          <div class="case-title">EGFR Kinase</div>
+          <div class="case-meta">
+            <span class="chip chip-pdb">PDB 1M17</span>
+            <span class="chip chip-rmsd">RMSD ~0.6 Å</span>
+          </div>
+          <p class="case-description">
+            See how Erlotinib docks into the active kinase domain of the Epidermal Growth Factor Receptor (EGFR). Track the crucial hydrogen bond forming with Met769.
+          </p>
+        </div>
+        <a href="static/egfr.html" class="btn btn-primary" target="_blank">▶ Launch Simulator</a>
+      </div>
+
+      <!-- BACE1 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="case-title">BACE1 (β-Secretase)</div>
+          <div class="case-meta">
+            <span class="chip chip-pdb">PDB 1FKN</span>
+            <span class="chip chip-rmsd">RMSD ~1.0 Å</span>
+          </div>
+          <p class="case-description">
+            Observe the docking of the OM99-2 peptide inhibitor core within the catalytic aspartyl dyad of BACE1 (Beta-secretase), a primary target in Alzheimer's research.
+          </p>
+        </div>
+        <a href="static/bace1.html" class="btn btn-primary" target="_blank">▶ Launch Simulator</a>
+      </div>
+
+      <!-- COX-2 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="case-title">COX-2</div>
+          <div class="case-meta">
+            <span class="chip chip-pdb">PDB 1CX2</span>
+            <span class="chip chip-rmsd">RMSD ~0.8 Å</span>
+          </div>
+          <p class="case-description">
+            Animate the docking of SC-558 into the cyclooxygenase-2 (COX-2) selective channel. Watch the ligand interact with the key Arg513 and Val523 pocket residues.
+          </p>
+        </div>
+        <a href="static/cox2.html" class="btn btn-primary" target="_blank">▶ Launch Simulator</a>
+      </div>
+    </div>
+
+    <section class="local-run-section">
+      <h2>🖥️ Run Locally & Upload Custom Files</h2>
+      <p>
+        To run the full dynamic application—including support for uploading custom PDB proteins and SDF/MOL2 ligands with real-time pocket detection and interactive simulation—run the app on your computer using Streamlit:
+      </p>
+      <div class="code-block">
+# Install scientific dependencies
+pip install -r requirements.txt
+
+# Run the Streamlit application
+streamlit run app.py
+      </div>
+    </section>
+
+    <footer>
+      <p>
+        Developed for bioinformatics and chemistry education. Source code available on <a href="https://github.com/jdsridhar/dock_edu" target="_blank">GitHub</a>.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
