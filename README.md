@@ -96,6 +96,27 @@ streamlit run app.py
 
 ---
 
+## ☁️ Deploy online (Streamlit Community Cloud)
+
+The app is a **live Python server**, so it runs on a Streamlit host — **not** GitHub Pages,
+which serves only static files and cannot run Streamlit. To put it online for free:
+
+1. Push this repo to GitHub (this one: `jdsridhar/dock_edu`, branch `main`).
+2. Go to **[share.streamlit.io](https://share.streamlit.io)** and sign in with GitHub.
+3. **Create app → Deploy a public app from GitHub**, then set:
+   - **Repository:** `jdsridhar/dock_edu`
+   - **Branch:** `main`
+   - **Main file path:** `app.py`
+4. *(Optional)* **Advanced settings → Python 3.12** for the most widely-available `rdkit`
+   wheels. `rdkit` is only used for MOL/SDF uploads and degrades gracefully if absent.
+5. **Deploy.** The first build installs `requirements.txt` (~1–2 min); you then get a public
+   `https://<app>.streamlit.app` URL that **re-deploys automatically on every push to `main`**.
+
+No secrets or system packages are required — `assets/` is bundled and the docking search runs
+server-side in NumPy.
+
+---
+
 ## 📁 Project Structure
 
 ```text
